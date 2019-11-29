@@ -2,6 +2,7 @@ import requests
 from collections import namedtuple
 
 from .api_collections import LogisticsApi
+from .api_collections import CatalogApi
 
 DEFAULT_TIMEOUT = 60.0
 
@@ -12,6 +13,7 @@ class Vtex:
                  app_key=None, app_token=None,
                  session=None, timeout=None):
         self.account_name = account_name
+        self.environment = environment
         self.app_key = app_key
         self.app_token = app_token
 
@@ -25,6 +27,7 @@ class Vtex:
 
         cfg = config(account_name, environment, session, timeout)
         self.logistics = LogisticsApi(cfg)
+        self.catalog = CatalogApi(cfg)
 
     def _get_header(self):
         return {'Accept': 'application/vnd.vtex.ds.v10+json',

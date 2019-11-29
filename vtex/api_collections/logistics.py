@@ -23,6 +23,6 @@ class LogisticsApi(BaseApi):
         url = self._build_url(f'/configuration/warehouses')
         return self.get_result(url)
 
-    def get_inventory_by_sku(self, sku_id):
+    def get_inventory_by_sku(self, sku_id: int):
         url = self._build_url(f'/inventory/skus/{sku_id}')
         return self.get_result(url)
