@@ -11,7 +11,7 @@ class CatalogApi(BaseApi):
         url = self._build_url(endpoint)
         return self.get_result(url)
 
-    def get_category(self, category_id):
+    def get_category(self, category_id=1):
         endpoint = f'/pvt/category/{category_id}'
         return self._call_api(endpoint)
 
@@ -23,12 +23,12 @@ class CatalogApi(BaseApi):
         endpoint = f'/pvt/brand/{brand_id}'
         return self._call_api(endpoint)
 
-    def get_product_especification(self, product_id: int):
+    def get_product_specification(self, product_id: int):
         endpoint = f'/pvt/products/{product_id}/specification'
         return self._call_api(endpoint)
 
     def get_product(self, product_id: int):
-        endpoint = f'pvt_products/ProductGet/{product_id}'
+        endpoint = f'/pvt/products/ProductGet/{product_id}'
         return self._call_api(endpoint)
 
     def get_product_variations(self, product_id: int):
@@ -38,7 +38,8 @@ class CatalogApi(BaseApi):
     def get_product_review_rate(self, product_id: int):
         # This one has an odd endpoint
         endpoint = f'/api/addon/pvt/review/GetProductRate/{product_id}'
-        return self.get_result(endpoint)
+        url = self.base_url + endpoint
+        return self.get_result(url)
 
     def get_list_all_skus(self, page=1, page_size=1000):
         endpoint = f'/pvt/sku/stockkeepingunitids?page={page}&pagesize={page_size}'
