@@ -7,10 +7,6 @@ class CatalogApi(BaseApi):
         catalog_endpoint = '/api/catalog_system'
         return self.base_url + catalog_endpoint + endpoint
 
-    def _call_api(self, endpoint):
-        url = self._build_url(endpoint)
-        return self.get_result(url)
-
     def get_category(self, category_id=1):
         endpoint = f'/pvt/category/{category_id}'
         return self._call_api(endpoint)
