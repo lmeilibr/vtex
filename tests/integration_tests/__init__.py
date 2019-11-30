@@ -15,3 +15,8 @@ def client() -> Vtex:
     app_key = os.environ.get('KEY')
     app_token = os.environ.get('TOKEN')
     return Vtex(account_name, environment, app_key, app_token)
+
+
+@pytest.fixture
+def customer_id():
+    return os.environ.get('CUSTOMER_ID')
