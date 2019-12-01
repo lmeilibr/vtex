@@ -20,3 +20,8 @@ def client() -> Vtex:
 @pytest.fixture
 def customer_id():
     return os.environ.get('CUSTOMER_ID')
+
+
+@pytest.fixture
+def transaction_id():
+    return os.environ.get("TRANSACTION_ID")

@@ -19,7 +19,8 @@ class BaseApi:
     def get_result(self, url):
         response = self.session.get(url, timeout=self.timeout)
         if response.status_code == 200:
-            js = response.json
+            js = response.json()
         else:
             js = None
-        return result(js, response.status_code)
+        res = result(js, response.status_code)
+        return res
