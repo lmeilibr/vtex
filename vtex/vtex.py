@@ -1,9 +1,8 @@
 import requests
 from collections import namedtuple
 
-from .api_collections import LogisticsApi
-from .api_collections import CatalogApi
-from .api_collections import GiftCardApi
+from .api_collections import LogisticsApi, CatalogApi, GiftCardApi, \
+    PaymentsGatewayApi, OrderManagementApi, MasterDataApi
 
 DEFAULT_TIMEOUT = 60.0
 
@@ -30,6 +29,9 @@ class Vtex:
         self.logistics = LogisticsApi(cfg)
         self.catalog = CatalogApi(cfg)
         self.gift_card = GiftCardApi(cfg)
+        self.payments_gateway = PaymentsGatewayApi(cfg)
+        self.order_management = OrderManagementApi(cfg)
+        self.master_data = MasterDataApi(cfg)
 
     def _get_header(self):
         return {'Accept': 'application/vnd.vtex.ds.v10+json',

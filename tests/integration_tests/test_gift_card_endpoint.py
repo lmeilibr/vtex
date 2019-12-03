@@ -1,5 +1,5 @@
 # Integration Tests
-from tests.integration_tests import OK, client, customer_id
+from tests.integration_tests import OK, client, transaction_id, customer_id
 from vtex import Vtex
 import pytest
 import os
@@ -13,11 +13,6 @@ def gift_card_provider_id():
 @pytest.fixture
 def gift_card_id():
     return os.environ.get("GIFT_CARD_ID")
-
-
-@pytest.fixture
-def transaction_id():
-    return os.environ.get("TRANSACTION_ID")
 
 
 def test_gift_card_imports(gift_card_id, transaction_id):
