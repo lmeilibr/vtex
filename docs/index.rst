@@ -6,9 +6,7 @@
 Welcome to vtex-api's documentation!
 ====================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+.. include:: modules.rst
 
 
 
