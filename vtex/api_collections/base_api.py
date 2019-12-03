@@ -21,7 +21,7 @@ class BaseApi:
         url = self._build_url(endpoint)
         return self.get_result(url)
 
-    def _build_url_with_endpoint(self, endpoint):
+    def _build_url(self, endpoint):
         raise NotImplementedError
 
     def get_result(self, url) -> Result:

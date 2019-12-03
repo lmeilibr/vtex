@@ -12,7 +12,7 @@ class GiftCardApi(BaseApi):
     Gift Card get functions for different endpoints
     """
 
-    def _build_url_with_endpoint(self, endpoint):
+    def _build_url(self, endpoint):
         midpoint = "/api/giftcardproviders"
         return self.base_url + midpoint + endpoint
 

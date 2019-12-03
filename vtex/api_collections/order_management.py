@@ -14,7 +14,7 @@ class OrderManagementApi(BaseApi):
     Order Management get functions for different endpoints
     """
 
-    def _build_url_with_endpoint(self, endpoint):
+    def _build_url(self, endpoint):
         url = self.base_url + f"/api/oms/pvt/orders"
         return url + endpoint
 
