@@ -10,22 +10,22 @@ def order_id():
     return os.environ.get("ORDER_ID")
 
 
-def test_get_order(client: Vtex, order_id):
-    result = client.order_management.get_order(order_id)
+@pytest.fixture
+def email():
+    return os.environ.get("VTEX_EMAIL")
+
+
+def test_get_profile_by_email(client: Vtex, email):
+    result = client.master_data.get_profile_by_email(email)
     assert result.status_code == OK
 
 
-@pytest.mark.skip("too long to run")
-def test_get_order_list(client: Vtex):
-    result = client.order_management.get_list_orders()
+def test_get_clients_scroll(client: Vtex):
+    result = client.master_data.get_clients_scroll()
     assert result.status_code == OK
 
 
-def test_get_conversation(client: Vtex, order_id):
-    result = client.order_management.get_conversation(order_id)
-    assert result.status_code == OK
-
-
-def test_get_payment_transaction(client: Vtex, order_id):
-    result = client.order_management.get_payment_transaction(order_id)
+def test_get_clients_next_scroll(client: Vtex):
+    initial = client.master_data.get_clients_scroll()
+    result = client.master_data.get_clients_next_scroll(initial.token)
     assert result.status_code == OK
