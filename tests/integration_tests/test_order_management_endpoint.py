@@ -29,3 +29,9 @@ def test_get_conversation(client: Vtex, order_id):
 def test_get_payment_transaction(client: Vtex, order_id):
     result = client.order_management.get_payment_transaction(order_id)
     assert result.status_code == OK
+
+
+def test_get_orders_list_by_page(client: Vtex):
+    page = 4
+    result = client.order_management.get_list_orders_by_page(page)
+    assert result.status_code == OK

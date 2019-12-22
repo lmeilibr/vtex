@@ -52,6 +52,22 @@ class OrderManagementApi(BaseApi):
             return Res(json_response, total_pages, result.status_code)
         return Res(None, None, result.status_code)
 
+    def get_list_orders_by_page(self, page: int = 1):
+        """
+        Given a page, return the orders list from that page
+        :param page:
+        :return: json dictionary
+        """
+        url = self._build_url(
+            f"?page={page}"
+        )
+        result = self.session.get(url, timeout=self.timeout)
+        if result.status_code == 200:
+            json_response = result.json()
+            total_pages = json_response["paging"]["pages"]
+            return Res(json_response, total_pages, result.status_code)
+        return Res(None, None, result.status_code)
+
     def get_conversation(self, order_id):
         """
         Given an order_id, returns its conversation history
