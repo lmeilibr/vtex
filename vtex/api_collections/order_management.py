@@ -52,6 +52,29 @@ class OrderManagementApi(BaseApi):
             return Res(json_response, total_pages, result.status_code)
         return Res(None, None, result.status_code)
 
+    def get_list_orders_per_day(
+            self, initial_date: datetime, page: int = 1
+    ):
+        """
+        Given an initial datetime objects and page (by default returns the first page),
+        returns a json dict, containing a list with orders
+        :param initial_date: datetime
+        :param page: int
+        :return: json dictionary
+        """
+        url = self._build_url(
+            f"?f_creationDate=creationDate:["
+            f"{initial_date.date()}T00:00:00.000Z TO "
+            f"{initial_date.date()}T23:59:59.999Z]"
+        )
+        params = {"page": f"{page}", "orderBy": "creationDate,asc"}
+        result = self.session.get(url, params=params, timeout=self.timeout)
+        if result.status_code == 200:
+            json_response = result.json()
+            total_pages = json_response["paging"]["pages"]
+            return Res(json_response, total_pages, result.status_code)
+        return Res(None, None, result.status_code)
+
     def get_list_orders_by_page(self, page: int = 1):
         """
         Given a page, return the orders list from that page

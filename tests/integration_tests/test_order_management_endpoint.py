@@ -3,6 +3,7 @@ from tests.integration_tests import OK, client
 from vtex import Vtex
 import pytest
 import os
+from datetime import datetime
 
 
 @pytest.fixture
@@ -34,4 +35,10 @@ def test_get_payment_transaction(client: Vtex, order_id):
 def test_get_orders_list_by_page(client: Vtex):
     page = 4
     result = client.order_management.get_list_orders_by_page(page)
+    assert result.status_code == OK
+
+
+def test_get_order_list_by_date(client: Vtex):
+    dt = datetime(2018, 3, 2)
+    result = client.order_management.get_list_orders_per_day(dt)
     assert result.status_code == OK
