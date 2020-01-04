@@ -16,6 +16,11 @@ class MasterDataApi(BaseApi):
         url = self._build_url(endpoint)
         return self.get_result(url)
 
+    def get_profile_by_user_profile_id(self, user_profile_id):
+        endpoint = f"CL/search/?_where=userId={user_profile_id}&_fields=_all"
+        url = self._build_url(endpoint)
+        return self.get_result(url)
+
     def get_clients_scroll(self):
         url = self._scroll_url()
         result = self.get_result(url)
