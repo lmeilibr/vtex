@@ -22,7 +22,7 @@ class MasterDataApi(BaseApi):
         return self.get_result(url)
 
     def get_clients_scroll(self):
-        url = self._scroll_url()
+        url = self._scroll_url() + "?_size=1000"
         result = self.get_result(url)
         return result
 
