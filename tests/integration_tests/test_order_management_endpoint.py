@@ -49,3 +49,12 @@ def test_get_order_list_by_date_hour(client: Vtex):
     hour = 23
     result = client.order_management.get_list_orders_per_hour_of_day(dt, hour)
     assert result.status_code == OK
+
+
+def test_get_order_list_by_date_hour_minute(client: Vtex):
+    dt = datetime(2019, 11, 29)
+    hour = 23
+    minute = 1
+    result = client.order_management \
+        .get_list_orders_per_hour_minute_of_day(dt, hour, minute)
+    assert result.status_code == OK

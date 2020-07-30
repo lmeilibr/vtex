@@ -79,9 +79,10 @@ class OrderManagementApi(BaseApi):
             self, initial_date: datetime, hour: int, page: int = 1
     ):
         """
-        Given an initial datetime objects and page (by default returns the first page),
-        returns a json dict, containing a list with orders
+        Given an initial datetime, hour and page (by default returns the first
+         page), returns a json dict, containing a list with orders
         :param initial_date: datetime
+        :param hour: int
         :param page: int
         :return: json dictionary
         """
@@ -89,6 +90,31 @@ class OrderManagementApi(BaseApi):
             f"?f_creationDate=creationDate:["
             f"{initial_date.date()}T{hour:02}:00:00.000Z TO "
             f"{initial_date.date()}T{hour:02}:59:59.999Z]"
+        )
+        params = {"page": f"{page}", "orderBy": "creationDate,asc"}
+        result = self.session.get(url, params=params, timeout=self.timeout)
+        if result.status_code == 200:
+            json_response = result.json()
+            total_pages = json_response["paging"]["pages"]
+            return Res(json_response, total_pages, result.status_code)
+        return Res(None, None, result.status_code)
+
+    def get_list_orders_per_hour_minute_of_day(
+            self, initial_date: datetime, hour: int, minute: int,
+            page: int = 1):
+        """
+        Given an initial datetime, hour, minute and page (by default returns
+        the first page), returns a json dict, containing a list with orders
+        :param initial_date: datetime
+        :param page: int
+        :param hour: int
+        :param minute: int
+        :return: json dictionary
+        """
+        url = self._build_url(
+            f"?f_creationDate=creationDate:["
+            f"{initial_date.date()}T{hour:02}:{minute:02}:00.000Z TO "
+            f"{initial_date.date()}T{hour:02}:{minute:02}:59.999Z]"
         )
         params = {"page": f"{page}", "orderBy": "creationDate,asc"}
         result = self.session.get(url, params=params, timeout=self.timeout)
