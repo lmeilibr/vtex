@@ -20,7 +20,12 @@ def user_profile_id():
     return os.environ.get("CUSTOMER_ID")
 
 
-@pytest.mark.skip("working for now")
+@pytest.fixture
+def acronym():
+    return "CL"
+
+
+# @pytest.mark.skip("working for now")
 def test_get_profile_by_email(client: Vtex, email):
     result = client.master_data.get_profile_by_email(email)
     assert result.status_code == OK
@@ -37,8 +42,29 @@ def test_get_clients_scroll(client: Vtex):
     assert result.status_code == OK
 
 
-@pytest.mark.skip("working for now")
+# @pytest.mark.skip("working for now")
 def test_get_clients_next_scroll(client: Vtex):
     initial = client.master_data.get_clients_scroll()
     result = client.master_data.get_clients_next_scroll(initial.token)
+    assert result.status_code == OK
+
+
+def test_data_entity_scroll(client: Vtex, acronym):
+    result = client.master_data.get_data_entity_scroll(acronym)
+    assert result.status_code == OK
+
+
+def test_get_data_entity_next_scroll(client: Vtex, acronym):
+    initial = client.master_data.get_data_entity_scroll(acronym)
+    result = client.master_data.get_data_entity_next_scroll(initial.token)
+    assert result.status_code == OK
+
+
+def test_get_data_entities_list(client: Vtex):
+    result = client.master_data.get_data_entities_list()
+    assert result.status_code == OK
+
+
+def test_get_data_entity_schema(client: Vtex, acronym):
+    result = client.master_data.get_data_entity_schema(acronym)
     assert result.status_code == OK
