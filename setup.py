@@ -6,7 +6,7 @@ with open('README.md', 'r', 'utf-8') as f:
 
 setup(
     name='vtex',
-    version='0.1.3',
+    version='0.1.4',
     license="MIT",
     description='VTEX API Wrapper for Python',
     long_description=readme,
